@@ -1,3 +1,6 @@
-export default (obj) => {
-  return Object.freeze(obj)
-}
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (obj) => {
+    return Object.freeze(obj);
+};
+//# sourceMappingURL=value.js.map
