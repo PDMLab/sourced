@@ -173,9 +173,10 @@ class SourcedEntity extends EventEmitter {
    */
   merge(snapshot) {
     log(util.format('merging snapshot %j', snapshot))
-    for (var property in snapshot) {
+    let val
+    for (const property in snapshot) {
       if (Object.prototype.hasOwnProperty.call(snapshot, property)) {
-        var val = cloneDeep(snapshot[property])
+        val = cloneDeep(snapshot[property])
       }
       this.mergeProperty(property, val)
     }
@@ -231,7 +232,9 @@ class SourcedEntity extends EventEmitter {
    * @param  {Array} events  an array of events to be replayed.
    */
   replay(events) {
-    var self = this
+    // TODO: get rid of aliasing
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    const self = this
 
     this.replaying = true
 
@@ -275,7 +278,7 @@ class SourcedEntity extends EventEmitter {
    */
   snapshot(): Omit<this, 'eventsToEmit'> {
     this.snapshotVersion = this.version
-    var snap = cloneDeep(this)
+    const snap = cloneDeep(this)
     return this.trimSnapshot(snap)
   }
 
@@ -336,12 +339,12 @@ class SourcedEntity extends EventEmitter {
       throw new EntityError(
         'Anonmyous functions are not allowed in digest method definitions. Please provide a function name'
       )
-    type.prototype[fn.name] = function () {
-      const digestArgs = Array.prototype.slice.call(arguments)
+    type.prototype[fn.name] = function (...args: any[]) {
+      const digestArgs = Array.prototype.slice(...args)
       digestArgs.unshift(fn.name)
       SourcedEntity.prototype.digest.apply(this, digestArgs)
 
-      const methodArgs = Array.prototype.slice.call(arguments)
+      const methodArgs = Array.prototype.slice(...args)
       return fn.apply(this, methodArgs)
     }
   }

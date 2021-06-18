@@ -1,12 +1,12 @@
 import Entity from '../src/entityProxy'
 import util from 'util'
 
-function User() {
+function User(...args: any[]) {
   this.apps = {}
   this.username = ''
   this.password = this.pass = ''
 
-  Entity.apply(this, arguments)
+  Entity.apply(this, ...args)
 }
 
 util.inherits(User, Entity)
@@ -17,10 +17,10 @@ User.prototype.grant = function (param) {
   this.emit('granted', param, this)
 }
 
-function Inventory() {
+function Inventory(...args: any[]) {
   this.products = []
 
-  Entity.apply(this, arguments)
+  Entity.apply(this, ...args)
 }
 
 util.inherits(Inventory, Entity)
