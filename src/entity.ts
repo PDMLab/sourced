@@ -123,9 +123,9 @@ class SourcedEntity extends EventEmitter {
    * Wrapper around the EventEmitter.emit method that adds a condition so events
    * are not fired during replay.
    */
-  emit(...args: any[]) {
+  emit(event: string, ...args: any[]) {
     if (!this.replaying) {
-      return events.EventEmitter.prototype.emit.apply(this, ...args)
+      return events.EventEmitter.prototype.emit(event, ...args)
     }
     return true
   }
@@ -136,7 +136,7 @@ class SourcedEntity extends EventEmitter {
    */
   enqueue(...args: any[]) {
     if (!this.replaying) {
-      this.eventsToEmit.push(...args)
+      this.eventsToEmit.push(args)
     }
   }
 
@@ -246,10 +246,11 @@ class SourcedEntity extends EventEmitter {
           /function\s+(\w+)\s?\(/,
           /class\s+(\w+)\s+extends?/
         ]
+        console.log('constructor', self.constructor.name)
         const match = classNameRegexes.find((regex) =>
-          regex.test(self.constructor.name)
+          regex.test(self.constructor.toString())
         )
-        const className = match.exec(self.constructor!.name)[1]
+        const className = match.exec(self.constructor!.toString())[1]
         const errorMessage = util.format(
           "method '%s' does not exist on model '%s'",
           event.method,
