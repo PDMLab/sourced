@@ -1,5 +1,0 @@
-{
-  "testEnvironment": "node",
-  "modulePaths": ["src", "/node_modules/"],
-  "collectCoverageFrom": ["src/*.ts"]
-}

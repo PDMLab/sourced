@@ -1,7 +1,7 @@
 import Entity from '../src/entityProxy'
 import util from 'util'
 
-function User () {
+function User() {
   this.apps = {}
   this.username = ''
   this.password = this.pass = ''
@@ -17,7 +17,7 @@ User.prototype.grant = function (param) {
   this.emit('granted', param, this)
 }
 
-function Inventory () {
+function Inventory() {
   this.products = []
 
   Entity.apply(this, arguments)
