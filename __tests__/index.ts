@@ -1,9 +1,4 @@
-import {
-  Entity,
-  Value,
-  SourcedEntity,
-  SourcedValue
-} from '../src/index'
+import { Entity, Value, SourcedEntity, SourcedValue } from '../src/index'
 
 describe('index', () => {
   it('exports Entity, Value, SourcedEntity, SourcedValue', () => {

@@ -4,9 +4,4 @@ import Value from './value'
 
 const SourcedValue = Value
 
-export {
-  SourcedEntity,
-  SourcedValue,
-  Entity,
-  Value
-}
+export { SourcedEntity, SourcedValue, Entity, Value }

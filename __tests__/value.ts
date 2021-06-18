@@ -12,7 +12,9 @@ describe('value', function () {
     try {
       value.property = 'new value'
     } catch (err) {
-      expect(err.toString()).toContain('Cannot assign to read only property \'property\' of object')
+      expect(err.toString()).toContain(
+        "Cannot assign to read only property 'property' of object"
+      )
     }
 
     expect(value.property).toBeDefined()
